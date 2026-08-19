@@ -1,10 +1,27 @@
 // EdinCard Vending — progressive front-end behaviour.
 // No build step, no framework. Everything degrades gracefully:
-// with JS disabled, the page is still fully readable and usable
-// (the FAQ accordion is native <details>, forms work by default).
+// with JS disabled the pages are still fully readable and navigable
+// (the FAQ accordions are native <details>, nav is plain links, and
+// every form has a mailto route in the copy beside it).
 
 (function () {
   "use strict";
+
+  /* =========================================================
+     CONFIG
+     ---------------------------------------------------------
+     FORM_ENDPOINT: where the contact / venue / notify forms POST.
+     Leave it empty and the forms fall back to opening the visitor's
+     email client with the message pre-filled — which works today,
+     with no backend, and loses nothing.
+
+     To collect submissions properly, paste a form endpoint here
+     (Formspree, Basin, Netlify Forms, a Google Apps Script webhook,
+     etc.). It must accept a POST of JSON and allow CORS from this
+     domain. Nothing else needs to change.
+     ========================================================= */
+  var FORM_ENDPOINT = "";
+  var CONTACT_EMAIL = "info@edincardvending.com";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -106,37 +123,180 @@
     }
   }
 
-  /* ---------- Notify-me form ---------- */
-  // No backend wired up yet: this confirms the input in place.
-  // Swap the TODO below for a real endpoint (Formspree, a Google
-  // Sheet via Apps Script, Mailchimp, etc.) when ready to collect
-  // real signups.
-  var form = document.getElementById("notify-form");
-  var note = document.getElementById("notify-note");
+  /* ---------- Email alert form (home + locations) ---------- */
+  var notifyForm = document.getElementById("notify-form");
+  var notifyNote = document.getElementById("notify-note");
 
-  if (form) {
-    form.addEventListener("submit", function (event) {
+  if (notifyForm && notifyNote) {
+    notifyForm.addEventListener("submit", function (event) {
       event.preventDefault();
       var emailField = document.getElementById("notify-email");
       var email = emailField.value.trim();
-      var submitBtn = form.querySelector("button[type=submit]");
+      var submitBtn = notifyForm.querySelector("button[type=submit]");
 
       if (!email || !emailField.checkValidity()) {
-        note.textContent = "That doesn't look like a valid email — check it and try again.";
-        note.classList.add("is-error");
+        notifyNote.textContent = "That doesn't look like a valid email — check it and try again.";
+        notifyNote.classList.add("is-error");
         return;
       }
 
-      note.classList.remove("is-error");
+      notifyNote.classList.remove("is-error");
       submitBtn.classList.add("is-loading");
 
-      // TODO: replace with a real signup endpoint.
-      window.setTimeout(function () {
-        console.log("Notify signup captured:", email);
-        submitBtn.classList.remove("is-loading");
-        note.textContent = "You're on the list — we'll email you when a machine lands nearby.";
-        form.reset();
-      }, 500);
+      send({ Email: email, List: "Machine alerts" }, "Machine alert sign-up")
+        .then(function (result) {
+          submitBtn.classList.remove("is-loading");
+          if (result === "mailto") {
+            notifyNote.textContent = "Your email app should open — send that message and you're on the list.";
+          } else {
+            notifyNote.textContent = "You're on the list — we'll email you when a machine lands nearby.";
+          }
+          notifyForm.reset();
+        })
+        .catch(function () {
+          submitBtn.classList.remove("is-loading");
+          notifyNote.textContent = "Something went wrong. Email " + CONTACT_EMAIL + " and we'll add you by hand.";
+          notifyNote.classList.add("is-error");
+        });
+    });
+  }
+
+  /* ---------- Contact + venue enquiry forms ---------- */
+  // Both forms share this handler. Each field's `name` becomes a labelled
+  // line in the message, so adding a field to the HTML needs no JS change.
+  document.querySelectorAll("form[data-form]").forEach(function (form) {
+    var status = form.querySelector("[data-form-status]");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Honeypot: a bot fills every field it finds, a person can't see this one.
+      var honeypot = form.querySelector('input[name="_hp"]');
+      if (honeypot && honeypot.value) return;
+
+      if (!validate(form, status)) return;
+
+      var submitBtn = form.querySelector("button[type=submit]");
+      submitBtn.classList.add("is-loading");
+      setStatus(status, "", false);
+
+      var subjectField = form.querySelector("[data-subject-field]");
+      var subject = form.getAttribute("data-subject") || "Website enquiry";
+      if (subjectField && subjectField.value) {
+        subject = subject + " — " + subjectField.value;
+      }
+
+      send(collect(form), subject)
+        .then(function (result) {
+          submitBtn.classList.remove("is-loading");
+          if (result === "mailto") {
+            setStatus(status, "Your email app should open with the message ready — hit send.", false);
+          } else {
+            setStatus(status, "Sent. We'll get back to you within two working days.", false);
+            form.reset();
+          }
+        })
+        .catch(function () {
+          submitBtn.classList.remove("is-loading");
+          setStatus(status, "Couldn't send that. Please email " + CONTACT_EMAIL + " directly.", true);
+        });
+    });
+
+    // Clear a field's error as soon as the visitor fixes it.
+    form.querySelectorAll("input, select, textarea").forEach(function (field) {
+      field.addEventListener("input", function () {
+        if (field.getAttribute("aria-invalid") === "true") {
+          field.removeAttribute("aria-invalid");
+          var msg = form.querySelector('[data-error-for="' + field.id + '"]');
+          if (msg) msg.textContent = "";
+        }
+      });
+    });
+  });
+
+  function collect(form) {
+    var data = {};
+    new FormData(form).forEach(function (value, key) {
+      if (key === "_hp") return;
+      value = String(value).trim();
+      if (value) data[key] = value;
+    });
+    return data;
+  }
+
+  function validate(form, status) {
+    var firstInvalid = null;
+
+    form.querySelectorAll("[required]").forEach(function (field) {
+      var msg = form.querySelector('[data-error-for="' + field.id + '"]');
+      var ok = field.value.trim() !== "" && field.checkValidity();
+
+      if (ok) {
+        field.removeAttribute("aria-invalid");
+        if (msg) msg.textContent = "";
+      } else {
+        field.setAttribute("aria-invalid", "true");
+        if (msg) {
+          msg.textContent =
+            field.value.trim() === ""
+              ? "This one's needed."
+              : field.type === "email"
+              ? "That doesn't look like a valid email."
+              : "Have another look at this.";
+        }
+        if (!firstInvalid) firstInvalid = field;
+      }
+    });
+
+    if (firstInvalid) {
+      setStatus(status, "A few fields need fixing.", true);
+      firstInvalid.focus();
+      return false;
+    }
+    return true;
+  }
+
+  function setStatus(el, text, isError) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle("is-error", Boolean(isError));
+  }
+
+  // Posts to FORM_ENDPOINT when one is configured; otherwise composes a
+  // mailto: so the enquiry still reaches us. Resolves with "posted" or
+  // "mailto" so callers can word the confirmation accordingly.
+  function send(data, subject) {
+    if (!FORM_ENDPOINT) {
+      var body = Object.keys(data)
+        .map(function (key) {
+          return key + ": " + data[key];
+        })
+        .join("\n\n");
+      window.location.href =
+        "mailto:" + CONTACT_EMAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+      return Promise.resolve("mailto");
+    }
+
+    return fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(Object.assign({ _subject: subject }, data)),
+    }).then(function (response) {
+      if (!response.ok) throw new Error("Bad response: " + response.status);
+      return "posted";
+    });
+  }
+
+  /* ---------- Contact form: reveal machine-detail field ---------- */
+  // Only asked for when it's actually relevant, so the form stays short.
+  var topicField = document.getElementById("c-topic");
+  var topicExtra = document.querySelector("[data-topic-extra]");
+
+  if (topicField && topicExtra) {
+    topicField.addEventListener("change", function () {
+      topicExtra.hidden = topicField.value !== "Machine issue or refund";
     });
   }
 
@@ -152,7 +312,7 @@
       slot.setAttribute("aria-label", "Slot " + code);
 
       function selectSlot() {
-        label.textContent = "SELECT \u00B7 " + code;
+        label.textContent = "SELECT · " + code;
       }
       slot.addEventListener("mouseenter", selectSlot);
       slot.addEventListener("focus", selectSlot);
@@ -180,6 +340,13 @@
   var mobileNav = document.getElementById("mobile-nav");
 
   if (menuToggle && mobileNav) {
+    function closeMenu() {
+      menuToggle.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
+      mobileNav.hidden = true;
+    }
+
     menuToggle.addEventListener("click", function () {
       var isOpen = menuToggle.classList.toggle("is-open");
       menuToggle.setAttribute("aria-expanded", String(isOpen));
@@ -188,12 +355,15 @@
     });
 
     mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        menuToggle.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open menu");
-        mobileNav.hidden = true;
-      });
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Escape closes it, and focus goes back to the button that opened it.
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !mobileNav.hidden) {
+        closeMenu();
+        menuToggle.focus();
+      }
     });
   }
 

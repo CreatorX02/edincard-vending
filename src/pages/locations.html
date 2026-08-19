@@ -1,0 +1,145 @@
+<!--META {
+  "title": "Locations — Find a Pokémon Card Machine in Edinburgh",
+  "description": "Where to find EdinCard Pokémon TCG vending machines in Edinburgh. Live sites, upcoming installs, the areas we're scouting, and email alerts when a machine lands near you.",
+  "schema": ["organization", "store"],
+  "priority": 0.9,
+  "changefreq": "weekly"
+}-->
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Locations</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">C1 &middot; WHERE TO FIND ONE</p>
+      <h1>Machines are going into Edinburgh venues now.</h1>
+      <p class="page-hero-lead">We're placing the first EdinCard units across the city through late 2026. Every live machine gets listed here with its venue, its address and its opening hours, the day it goes in.</p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="#notify">Get told when one lands</a>
+        <a class="btn btn-outline" href="/host-a-machine.html">Suggest a venue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MACHINES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">LIVE NOW</p>
+        <h2>Machines you can use today.</h2>
+      </div>
+
+      <!--
+        ADDING A MACHINE
+        ----------------
+        When a unit goes live, delete the .location-empty block below and add a
+        card per machine in the .card-grid, following this shape:
+
+        <article class="location-card">
+          <div class="location-card-top">
+            <h3>Venue name</h3>
+            <span class="pill pill-live">Live</span>
+          </div>
+          <p>One line on what the venue is and where in it the machine sits.</p>
+          <div class="location-meta">
+            <span>123 Example Street, Edinburgh EH1 1AA</span>
+            <span>Open Mon–Sat, 10:00–18:00</span>
+            <span>Slots: 9 · Restocked weekly</span>
+          </div>
+        </article>
+
+        Use pill-live for installed units, pill-soon for a confirmed install with
+        a date, and pill-scouting for a venue still in conversation.
+        Remember to re-run: python3 tools/build.py
+      -->
+      <div class="location-empty" data-reveal>
+        <p class="eyebrow center" style="margin-bottom:12px">NO PUBLIC MACHINES LISTED YET</p>
+        <p>The first units are being installed and every one of them will be listed here — venue, address and hours — as soon as it's live and taking payments. We'd rather show an empty list than a map full of machines that don't exist yet.</p>
+        <p style="margin-top:18px"><a class="btn btn-primary" href="#notify">Email me when the first one lands</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLLOUT -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">THE ROLLOUT</p>
+        <h2>How the city gets covered.</h2>
+        <p class="lead">We're not carpet-bombing Edinburgh with units. Each machine goes somewhere it'll actually be used, gets serviced properly, and proves itself before the next one goes in.</p>
+      </div>
+
+      <div class="split" data-reveal>
+        <ol class="process">
+          <li>
+            <span class="process-step" aria-hidden="true">01</span>
+            <h3>Scout</h3>
+            <p>We look for venues where people already stop and linger — game shops, comic and collectible stores, caf&eacute;s, arcades, student venues — with the floor space and the footfall to justify a unit.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">02</span>
+            <h3>Agree and install</h3>
+            <p>Terms and revenue share agreed in writing first, then we deliver, site, power up and stock the machine. The venue does nothing but point at a wall.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">03</span>
+            <h3>Service and tune</h3>
+            <p>Fixed-schedule restocks, plus a stock mix tuned to what that venue's regulars actually buy. Slots that don't move get reassigned.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">04</span>
+            <h3>List it here</h3>
+            <p>Once it's live and taking payments, the venue goes on this page and everyone on the notify list gets an email.</p>
+          </li>
+        </ol>
+
+        <div data-reveal data-reveal-delay="1">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">◎</div>
+            <h3>Areas we're prioritising</h3>
+            <p>Old Town and the Royal Mile, Newington and the university belt, Leith Walk, Tollcross and Bruntsfield, and the West End. Those are where the collector footfall and the venue density overlap.</p>
+          </div>
+          <div class="card" style="margin-top:22px">
+            <div class="card-icon" aria-hidden="true">★</div>
+            <h3>Know a spot?</h3>
+            <p>If there's a shop, caf&eacute; or venue that's obviously crying out for a machine, tell us — including if it's your own. Venue suggestions from locals are how the good sites get found.</p>
+            <p style="margin-top:14px"><a class="teaser-more" href="/host-a-machine.html">Suggest a venue</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTIFY -->
+  <section class="section locations" id="notify">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>ALERTS</p>
+      <h2 data-reveal>Get an email the day a machine goes live.</h2>
+      <p class="locations-sub" data-reveal>One email per new machine, plus the occasional note when something unusual lands in a Vault slot. No newsletter, no daily nonsense, unsubscribe in one click.</p>
+
+      <form class="notify-form" id="notify-form" data-reveal novalidate>
+        <label class="sr-only" for="notify-email">Email address</label>
+        <input type="email" id="notify-email" name="email" placeholder="you@email.com" required autocomplete="email" inputmode="email">
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Notify me</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p class="form-note" id="notify-note" role="status" aria-live="polite"></p>
+      <p class="form-consent center" style="max-width:52ch;margin-left:auto;margin-right:auto">We use your email only to tell you about EdinCard machines. See the <a href="/privacy.html">privacy notice</a>.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap" data-reveal>
+      <h2>Or skip the wait entirely.</h2>
+      <p>If you run a venue in Edinburgh, the fastest way to get a machine near you is to put one in your own.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="/host-a-machine.html">Host a machine</a>
+        <a class="btn btn-outline" href="/contact.html">Contact us</a>
+      </div>
+    </div>
+  </section>
