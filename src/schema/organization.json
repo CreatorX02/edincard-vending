@@ -11,8 +11,14 @@
   "email": "info@edincardvending.com",
   "foundingDate": "2025",
   "founder": [
-    { "@type": "Person", "name": "Fraser Gosling" },
-    { "@type": "Person", "name": "Teddy Ogosu" }
+    {
+      "@type": "Person",
+      "name": "Benson"
+    },
+    {
+      "@type": "Person",
+      "name": "Fraser"
+    }
   ],
   "address": {
     "@type": "PostalAddress",
