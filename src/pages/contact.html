@@ -1,0 +1,130 @@
+<!--META {
+  "title": "Contact EdinCard Vending",
+  "description": "Get in touch with EdinCard Vending in Edinburgh — machine problems and refunds, venue and hosting enquiries, stock requests, supply and press. We reply to everything.",
+  "schema": ["organization"],
+  "priority": 0.7
+}-->
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Contact</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">GET IN TOUCH</p>
+      <h1>One inbox, two people, real replies.</h1>
+      <p class="page-hero-lead">Whether it's a pack that didn't drop, a venue that wants a machine, or a set you think we should be stocking — it all comes to the same place, and we answer all of it.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split-narrow">
+      <div data-reveal>
+        <p class="contact-eyebrow">DIRECT</p>
+        <div class="contact-card">
+          <h3>Email</h3>
+          <p style="margin-bottom:0"><a href="mailto:info@edincardvending.com">info@edincardvending.com</a></p>
+        </div>
+        <div class="contact-card" style="margin-top:18px">
+          <h3>Where we are</h3>
+          <p style="margin-bottom:0">Edinburgh, Scotland.<br>EdinCard Ltd operates machines across the city — there's no public counter to visit.</p>
+        </div>
+        <div class="contact-card" style="margin-top:18px">
+          <h3>Response times</h3>
+          <p style="margin-bottom:0">We aim to reply within two working days. Failed vends and refunds get priority — flag those in the subject line and we'll get to them first.</p>
+        </div>
+
+        <p class="contact-eyebrow" style="margin-top:34px">MACHINE PROBLEM?</p>
+        <div class="callout" style="margin-top:0;margin-bottom:0">
+          <p class="callout-title">What to include</p>
+          <p>The venue, the slot code (like A1 or C3), and roughly what time it happened. That's everything we need to match it against the vend log. Within 48 hours, please.</p>
+        </div>
+      </div>
+
+      <div class="form-card" data-reveal data-reveal-delay="1">
+        <h2 style="font-size:1.5rem">Send us a message</h2>
+        <p>Pick a topic so it lands with the right one of us.</p>
+
+        <form id="contact-form" data-form="contact" data-subject="Website enquiry" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="c-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="c-name" name="Name" required autocomplete="name">
+              <p class="field-error" data-error-for="c-name"></p>
+            </div>
+            <div class="field">
+              <label for="c-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="c-email" name="Email" required autocomplete="email" inputmode="email">
+              <p class="field-error" data-error-for="c-email"></p>
+            </div>
+            <div class="field field-wide">
+              <label for="c-topic">What's it about? <span class="req" aria-hidden="true">*</span></label>
+              <select id="c-topic" name="Topic" required data-subject-field>
+                <option value="">Choose a topic…</option>
+                <option>Machine issue or refund</option>
+                <option>Hosting a machine at my venue</option>
+                <option>Suggesting a venue</option>
+                <option>Stock request</option>
+                <option>Supply or wholesale</option>
+                <option>Press and media</option>
+                <option>Something else</option>
+              </select>
+              <p class="field-error" data-error-for="c-topic"></p>
+            </div>
+            <div class="field field-wide" data-topic-extra hidden>
+              <label for="c-machine">Venue and slot code</label>
+              <input type="text" id="c-machine" name="Venue and slot" placeholder="e.g. The Example Cafe, slot B2, around 3pm Saturday">
+              <p class="field-hint">Only needed for machine issues — it's how we find the vend in the log.</p>
+            </div>
+            <div class="field field-wide">
+              <label for="c-message">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="c-message" name="Message" required></textarea>
+              <p class="field-error" data-error-for="c-message"></p>
+            </div>
+          </div>
+
+          <div class="hp-field" aria-hidden="true">
+            <label for="c-company">Leave this field empty</label>
+            <input type="text" id="c-company" name="_hp" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <span class="btn-label">Send message</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </div>
+          <p class="form-consent">We use what you send only to reply to you. No mailing list, no sharing with anyone else. See the <a href="/privacy.html">privacy notice</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">FASTER ROUTES</p>
+        <h2>Some things have a better page than an email.</h2>
+      </div>
+      <div class="card-grid card-grid-3">
+        <a class="teaser-link" href="/host-a-machine.html" data-reveal>
+          <h3>Venue enquiries</h3>
+          <p>The hosting page has the terms, the process and a form built for venue details.</p>
+          <span class="teaser-more">Host a machine</span>
+        </a>
+        <a class="teaser-link" href="/faq.html" data-reveal data-reveal-delay="1">
+          <h3>Common questions</h3>
+          <p>Payment, refunds, authenticity, restocking and locations, already answered.</p>
+          <span class="teaser-more">Read the FAQ</span>
+        </a>
+        <a class="teaser-link" href="/locations.html" data-reveal data-reveal-delay="2">
+          <h3>Where's the nearest one?</h3>
+          <p>Live machines, the rollout plan, and email alerts when one lands near you.</p>
+          <span class="teaser-more">Locations</span>
+        </a>
+      </div>
+    </div>
+  </section>
