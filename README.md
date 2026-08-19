@@ -1,20 +1,46 @@
 # EdinCard Vending
 
 Landing page for EdinCard Vending, EdinCard Ltd's Pokémon TCG vending machine
-business in Edinburgh. Static site, no build step, no framework.
+business in Edinburgh. Static site, no build step, no framework — built to a
+current (2026) production standard: semantic HTML, WCAG 2.2-minded
+accessibility, Core Web Vitals-friendly performance, and full SEO/social
+metadata.
 
 ## What's in here
 
 ```
 edincard-vending/
-├── index.html        Page content and structure
-├── css/style.css      Design system + styles
-├── js/main.js          Notify-form handling, hero slot interaction
-└── assets/             Drop logo/images here as they're ready
+├── index.html         Page content, meta tags, JSON-LD structured data
+├── css/style.css       Design system + styles
+├── js/main.js           Scroll reveals, mobile menu, notify form, stats counter
+├── assets/              favicon.svg, apple-touch-icon.png, og-image.png
+├── robots.txt           Crawler rules + sitemap pointer
+├── sitemap.xml           Single-page sitemap
+├── 404.html              Branded not-found page
+└── CNAME                 GitHub Pages custom domain (edincardvending.com)
 ```
 
-Sections on the page: hero, what EdinCard is, how it works, a locations
-"notify me" signup, and a pitch to venue owners who want to host a machine.
+Sections on the page: sticky header with a live ticker, hero, a stats strip,
+what EdinCard is, three "what's inside" pack tiers, how it works, a locations
+"notify me" signup, a pitch to venue owners who want to host a machine, and
+an FAQ accordion.
+
+## What's new since the first version
+
+- **Mobile menu** — a proper hamburger nav on small screens, not just a
+  hidden desktop nav.
+- **Scroll reveals** — sections fade in via `IntersectionObserver`, and fully
+  disable themselves for anyone with `prefers-reduced-motion` set.
+- **Count-up stats, card tilt, marquee ticker** — small motion details, all
+  respecting reduced-motion.
+- **SEO**: Open Graph + Twitter Card tags, canonical URL, `Store` JSON-LD
+  structured data, `robots.txt`, `sitemap.xml`.
+- **Icons**: SVG favicon, 180×180 apple-touch-icon, 1200×630 OG share image
+  (all generated from the brand tokens, not stock art).
+- **Accessibility**: skip-to-content link, `aria-live` form status, keyboard-
+  operable hero slots, visible focus states throughout, native
+  `<details>`/`<summary>` for the FAQ so it works with zero JS.
+- **Custom 404 page**, styled to match the site.
 
 ## Running it locally
 
@@ -60,8 +86,12 @@ point it at this folder with no build command.
 
 - Swap the `notify-form` submit handler in `js/main.js` for a real signup
   endpoint (Formspree, a Google Sheet via Apps Script, Mailchimp, etc.).
-- Wire the "Host a machine" `mailto:` link to whichever inbox should own
-  venue enquiries, or replace it with a form.
 - Add real machine locations to the Locations section once the first units
   are placed.
-- Drop a logo/wordmark into `assets/` and swap it in for the `EC` text mark.
+- Drop a logo/wordmark into `assets/` and swap it in for the `EC` text mark
+  (update `favicon.svg`, `apple-touch-icon.png`, and `og-image.png` to match).
+- The FAQ's payment/return/stocking answers are placeholder copy — confirm
+  actual policy (returns, data handling, T&Cs) before relying on it publicly.
+- Consider adding Google Search Console + a lightweight analytics tool
+  (e.g. Plausible or GA4) once the domain is fully live, so signups and
+  traffic are measurable.
