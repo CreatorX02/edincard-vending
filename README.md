@@ -121,12 +121,14 @@ A few things need a human with facts:
   Both need EdinCard Ltd's **registered company number and registered office**
   filled in, and terms should get a solicitor's read-through. Delete the box
   once done. UK company law requires those details on a trading site.
-- **`locations.html`** lists the Edinburgh Waverley machine. Confirm its
-  **exact position in the station** and **daily hours** — right now the card
-  says "open station hours", which is safe but vague, and travellers will
-  want the specific spot. To add the next site, follow the HTML comment in
-  `src/pages/locations.html` and copy `src/schema/machine-waverley.json` so
-  the new machine gets its own local-search entry too.
+- **`locations.html`** lists Edinburgh Waverley as **coming soon**, not live.
+  When the unit is installed and taking payments, three things flip together:
+  the card's pill (`pill-soon` → `pill-live`), the section heading, and the
+  `machine-waverley` entry in the page's `schema` array — see
+  `src/schema/README.md`. Until then no `Store` markup is published for it,
+  because a search result saying you can buy there would be false.
+  The exact position in the station and its daily hours are still to confirm;
+  the card says "hours confirmed at install" in the meantime.
 - **Prices** are deliberately not stated anywhere on the site, since they vary
   by slot and set. If you want them published, they need to be real.
 - **The hero machine's slot names** (`src/pages/index.html`) list real, current
