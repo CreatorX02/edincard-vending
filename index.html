@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdinCard Vending — Pokémon TCG vending machines, Edinburgh</title>
+<meta name="description" content="EdinCard Vending places Pokémon TCG vending machines around Edinburgh. Find a machine, pull a pack, open it live.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="mark" href="#top">
+      <span class="mark-badge">EC</span>
+      <span class="mark-text">EdinCard<span class="mark-sub">Vending</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#venues">Host a machine</a>
+      <a href="#locations">Locations</a>
+    </nav>
+    <a class="btn btn-ghost nav-cta" href="#venues">Host a machine</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">A1 &middot; EDINBURGH POKÉMON TCG VENDING</p>
+        <h1>Every machine is a pack<br>waiting to be opened.</h1>
+        <p class="hero-sub">EdinCard puts real Pokémon TCG product in real machines, in real Edinburgh venues. No app queue, no online drop, no bots. Walk up, pick a slot, watch it fall.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#locations">Find a machine</a>
+          <a class="btn btn-outline" href="#venues">Host a machine</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="machine">
+          <div class="machine-glass">
+            <div class="slot-grid">
+              <div class="slot"><span class="slot-code">A1</span><div class="pack pack-1"></div></div>
+              <div class="slot"><span class="slot-code">A2</span><div class="pack pack-2"></div></div>
+              <div class="slot slot-featured"><span class="slot-code">A3</span><div class="pack pack-3"></div><span class="slot-glow"></span></div>
+              <div class="slot"><span class="slot-code">B1</span><div class="pack pack-2"></div></div>
+              <div class="slot"><span class="slot-code">B2</span><div class="pack pack-1"></div></div>
+              <div class="slot"><span class="slot-code">B3</span><div class="pack pack-2"></div></div>
+              <div class="slot"><span class="slot-code">C1</span><div class="pack pack-3"></div></div>
+              <div class="slot"><span class="slot-code">C2</span><div class="pack pack-1"></div></div>
+              <div class="slot"><span class="slot-code">C3</span><div class="pack pack-2"></div></div>
+            </div>
+          </div>
+          <div class="machine-base">
+            <span class="machine-label">SELECT · A3</span>
+            <span class="machine-coin" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section class="section what">
+    <div class="wrap what-inner">
+      <div class="what-copy">
+        <p class="eyebrow">A2 &middot; THE IDEA</p>
+        <h2>Vending, but the product is a pull.</h2>
+        <p>A card machine only works if what's inside is worth opening. EdinCard stocks each unit with sealed Pokémon TCG packs, from current sets through to sought-after reprints, checked and refilled by hand rather than left to sit.</p>
+        <p>No membership, no reservation window. If the light's on, the slot's live.</p>
+      </div>
+      <dl class="spec-card">
+        <div class="spec-row"><dt>Founded</dt><dd>Edinburgh, 2025</dd></div>
+        <div class="spec-row"><dt>Format</dt><dd>Sealed TCG packs, machine vend</dd></div>
+        <div class="spec-row"><dt>Operator</dt><dd>EdinCard Ltd</dd></div>
+        <div class="spec-row"><dt>Coverage</dt><dd>Edinburgh venues, expanding</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how" id="how">
+    <div class="wrap">
+      <p class="eyebrow center">B1&ndash;B3 &middot; HOW IT WORKS</p>
+      <h2 class="center">Three slots, start to finish.</h2>
+
+      <div class="steps">
+        <article class="step">
+          <span class="step-code">B1</span>
+          <h3>Tap in</h3>
+          <p>Card or contactless at the machine. No account, no app download.</p>
+        </article>
+        <article class="step">
+          <span class="step-code">B2</span>
+          <h3>Watch it drop</h3>
+          <p>Pick a slot, hear the coil turn, catch the pack as it lands. What you see stocked is what's inside.</p>
+        </article>
+        <article class="step">
+          <span class="step-code">B3</span>
+          <h3>Open it live</h3>
+          <p>Rip it at the machine or take it home. Either way, it's yours the second it lands in the tray.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="section locations" id="locations">
+    <div class="wrap">
+      <p class="eyebrow">C1 &middot; WHERE TO FIND ONE</p>
+      <h2>Machines are going into Edinburgh venues now.</h2>
+      <p class="locations-sub">We're placing the first units across the city through late 2026. Leave your email and we'll tell you the moment one lands near you.</p>
+
+      <form class="notify-form" id="notify-form">
+        <label class="sr-only" for="notify-email">Email address</label>
+        <input type="email" id="notify-email" name="email" placeholder="you@email.com" required>
+        <button type="submit" class="btn btn-primary">Notify me</button>
+      </form>
+      <p class="form-note" id="notify-note" role="status"></p>
+    </div>
+  </section>
+
+  <!-- VENUES / PARTNERS -->
+  <section class="section venues" id="venues">
+    <div class="wrap venues-inner">
+      <div>
+        <p class="eyebrow">C2 &middot; FOR VENUE OWNERS</p>
+        <h2>Host a machine, keep the floor space working.</h2>
+        <p>EdinCard supplies, stocks, and services the unit. You get a footfall draw and a share of every vend, with zero stock to manage yourself. Good fits: game shops, cafés, comic and collectible stores, arcades, student unions.</p>
+        <ul class="venue-list">
+          <li><span class="venue-code">01</span>We install and insure the machine</li>
+          <li><span class="venue-code">02</span>We restock and audit on a set schedule</li>
+          <li><span class="venue-code">03</span>You take a cut of every pack sold on site</li>
+        </ul>
+        <a class="btn btn-outline" href="mailto:hello@edincard.co.uk?subject=Hosting%20a%20machine">Get in touch</a>
+      </div>
+      <div class="venue-card">
+        <p class="venue-card-eyebrow">EXPECT</p>
+        <p class="venue-card-line">A unit that fits by a till point or entrance, roughly the footprint of a small arcade cabinet.</p>
+        <p class="venue-card-line">Servicing on a fixed schedule, so it's never the empty machine in the corner.</p>
+        <p class="venue-card-line">A simple revenue share, agreed before install, paid on schedule.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark-badge">EC</span>
+      <div>
+        <p class="footer-name">EdinCard Vending</p>
+        <p class="footer-sub">A product of EdinCard Ltd &middot; Fraser Gosling &amp; Teddy Ogosu &middot; Edinburgh, Scotland</p>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:hello@edincard.co.uk">hello@edincard.co.uk</a>
+      <a href="#how">How it works</a>
+      <a href="#venues">Host a machine</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
