@@ -571,8 +571,11 @@ a{ color:inherit; }
 .section-head.center{ text-align:center; margin-left:auto; margin-right:auto; }
 .lead{ font-size:1.05rem; color:var(--cream-dim); }
 
-/* two-column split */
-.split{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start; }
+/* two-column split — each variant stands alone, no base class needed */
+.split, .split-even, .split-narrow{
+  display:grid; gap:56px; align-items:start;
+}
+.split{ grid-template-columns:1.1fr 0.9fr; }
 .split-even{ grid-template-columns:1fr 1fr; }
 .split-narrow{ grid-template-columns:0.9fr 1.1fr; }
 @media (max-width:860px){
