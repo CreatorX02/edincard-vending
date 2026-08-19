@@ -1,7 +1,7 @@
 <!--META {
   "title": "Locations — Find a Pokémon Card Machine in Edinburgh",
-  "description": "Where to find EdinCard Pokémon TCG vending machines in Edinburgh. Live sites, upcoming installs, the areas we're scouting, and email alerts when a machine lands near you.",
-  "schema": ["organization", "store"],
+  "description": "Find EdinCard's Pokémon TCG vending machine at Edinburgh Waverley station, plus upcoming sites across the city and email alerts when a new machine goes live.",
+  "schema": ["organization", "store", "machine-waverley"],
   "priority": 0.9,
   "changefreq": "weekly"
 }-->
@@ -15,50 +15,64 @@
         </ol>
       </nav>
       <p class="eyebrow">C1 &middot; WHERE TO FIND ONE</p>
-      <h1>Machines are going into Edinburgh venues now.</h1>
-      <p class="page-hero-lead">We're placing the first EdinCard units across the city through late 2026. Every live machine gets listed here with its venue, its address and its opening hours, the day it goes in.</p>
+      <h1>Find us at Edinburgh Waverley.</h1>
+      <p class="page-hero-lead">Our first machine is in at Waverley, and more are going into venues across the city through late 2026. Every live machine gets listed here with its venue, its address and its opening hours, the day it goes in.</p>
       <div class="page-hero-actions">
-        <a class="btn btn-primary" href="#notify">Get told when one lands</a>
+        <a class="btn btn-primary" href="#live">See the machine</a>
         <a class="btn btn-outline" href="/host-a-machine.html">Suggest a venue</a>
       </div>
     </div>
   </section>
 
   <!-- LIVE MACHINES -->
-  <section class="section">
+  <section class="section" id="live">
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">LIVE NOW</p>
         <h2>Machines you can use today.</h2>
+        <p class="lead">One in, more coming. Every unit listed here is installed and taking payments &mdash; we don't list a machine before it exists.</p>
       </div>
 
       <!--
         ADDING A MACHINE
         ----------------
-        When a unit goes live, delete the .location-empty block below and add a
-        card per machine in the .card-grid, following this shape:
+        Add one <article class="location-card"> per live unit, following the
+        Waverley card below. Use pill-live for an installed, paying unit,
+        pill-soon for a confirmed install with a date, and pill-scouting for
+        a venue still in conversation.
 
-        <article class="location-card">
-          <div class="location-card-top">
-            <h3>Venue name</h3>
-            <span class="pill pill-live">Live</span>
-          </div>
-          <p>One line on what the venue is and where in it the machine sits.</p>
-          <div class="location-meta">
-            <span>123 Example Street, Edinburgh EH1 1AA</span>
-            <span>Open Mon–Sat, 10:00–18:00</span>
-            <span>Slots: 9 · Restocked weekly</span>
-          </div>
-        </article>
+        A new site also wants its own JSON-LD: copy src/schema/machine-waverley.json,
+        change the @id, name and address, and add the filename to this page's
+        "schema" list in the front matter above. That is what puts the machine
+        into local search results.
 
-        Use pill-live for installed units, pill-soon for a confirmed install with
-        a date, and pill-scouting for a venue still in conversation.
         Remember to re-run: python3 tools/build.py
       -->
-      <div class="location-empty" data-reveal>
-        <p class="eyebrow center" style="margin-bottom:12px">NO PUBLIC MACHINES LISTED YET</p>
-        <p>The first units are being installed and every one of them will be listed here — venue, address and hours — as soon as it's live and taking payments. We'd rather show an empty list than a map full of machines that don't exist yet.</p>
-        <p style="margin-top:18px"><a class="btn btn-primary" href="#notify">Email me when the first one lands</a></p>
+      <div class="card-grid card-grid-2" data-reveal>
+        <article class="location-card">
+          <div class="location-card-top">
+            <h3>Edinburgh Waverley</h3>
+            <span class="pill pill-live">Live</span>
+          </div>
+          <p>Our first machine, inside the city-centre station between the Old Town and Princes Street &mdash; and about as much footfall as Scotland has to offer.</p>
+          <div class="location-meta">
+            <span>Waverley Station, Edinburgh EH1 1BB</span>
+            <span>Entrances: Waverley Bridge, Princes Street, Market Street</span>
+            <span>Open station hours &middot; Contactless only</span>
+          </div>
+        </article>
+        <article class="location-card">
+          <div class="location-card-top">
+            <h3>Your venue next?</h3>
+            <span class="pill pill-scouting">Scouting</span>
+          </div>
+          <p>We're picking the next sites now. If you run somewhere in Edinburgh with footfall and a spare square metre, the machine costs you nothing to host.</p>
+          <div class="location-meta">
+            <span>Game shops &middot; caf&eacute;s &middot; collectible stores</span>
+            <span>Arcades &middot; student venues &middot; indoor markets</span>
+          </div>
+          <p style="margin-bottom:0"><a class="teaser-more" href="/host-a-machine.html">Host a machine</a></p>
+        </article>
       </div>
     </div>
   </section>

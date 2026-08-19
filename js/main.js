@@ -309,10 +309,20 @@
       slot.setAttribute("tabindex", "0");
       slot.setAttribute("role", "button");
       var code = slot.getAttribute("data-code") || "";
-      slot.setAttribute("aria-label", "Slot " + code);
+      // textContent, not the raw attribute, so &mdash; and &amp; in the
+      // markup reach the readout as the characters they stand for.
+      var probe = document.createElement("div");
+      probe.innerHTML = slot.getAttribute("data-set") || "";
+      var set = probe.textContent;
+      var tier = slot.getAttribute("data-tier") || "";
+
+      slot.setAttribute(
+        "aria-label",
+        set ? "Slot " + code + ", " + tier + " slot, " + set : "Slot " + code
+      );
 
       function selectSlot() {
-        label.textContent = "SELECT · " + code;
+        label.textContent = set ? code + " · " + set.toUpperCase() : "SELECT · " + code;
       }
       slot.addEventListener("mouseenter", selectSlot);
       slot.addEventListener("focus", selectSlot);

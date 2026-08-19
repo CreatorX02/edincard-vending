@@ -121,11 +121,19 @@ A few things need a human with facts:
   Both need EdinCard Ltd's **registered company number and registered office**
   filled in, and terms should get a solicitor's read-through. Delete the box
   once done. UK company law requires those details on a trading site.
-- **`locations.html`** currently shows an honest empty state. When the first
-  machine goes live, follow the HTML comment in `src/pages/locations.html` to
-  add a location card, and delete the empty state.
+- **`locations.html`** lists the Edinburgh Waverley machine. Confirm its
+  **exact position in the station** and **daily hours** — right now the card
+  says "open station hours", which is safe but vague, and travellers will
+  want the specific spot. To add the next site, follow the HTML comment in
+  `src/pages/locations.html` and copy `src/schema/machine-waverley.json` so
+  the new machine gets its own local-search entry too.
 - **Prices** are deliberately not stated anywhere on the site, since they vary
   by slot and set. If you want them published, they need to be real.
+- **The hero machine's slot names** (`src/pages/index.html`) list real, current
+  sets — Mega Evolution-era fills plus 151 and Prismatic Evolutions in the
+  Vault slots — and are captioned "Example fill". Swap them for the actual
+  Waverley planogram when you want the mockup to mirror the real machine.
+  No official pack artwork is used anywhere: set names are text only.
 - **`FORM_ENDPOINT`** in `js/main.js` — set it when you want submissions
   captured rather than routed through the visitor's email client.
 - **Analytics** are deliberately absent, which is why there's no cookie banner
