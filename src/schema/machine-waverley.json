@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "@id": "https://edincardvending.com/locations.html#waverley",
+  "name": "EdinCard Vending — Edinburgh Waverley",
+  "description": "Sealed Pokémon TCG vending machine inside Edinburgh Waverley station.",
+  "url": "https://edincardvending.com/locations.html",
+  "image": "https://edincardvending.com/assets/og-image.png",
+  "email": "info@edincardvending.com",
+  "priceRange": "££",
+  "paymentAccepted": "Contactless card, Apple Pay, Google Pay",
+  "currenciesAccepted": "GBP",
+  "parentOrganization": { "@id": "https://edincardvending.com/#organization" },
+  "address": {
+    "@type": "PostalAddress",
+    "name": "Edinburgh Waverley Station",
+    "streetAddress": "Waverley Station, Waverley Bridge",
+    "addressLocality": "Edinburgh",
+    "addressRegion": "Scotland",
+    "postalCode": "EH1 1BB",
+    "addressCountry": "GB"
+  },
+  "containedInPlace": {
+    "@type": "TrainStation",
+    "name": "Edinburgh Waverley"
+  }
+}

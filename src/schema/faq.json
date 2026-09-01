@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is actually inside an EdinCard slot?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sealed, factory-fresh Pokémon TCG product. Nothing is opened, resealed, weighed or swapped before it goes into a machine. Every slot is labelled with exactly what it dispenses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I pay at an EdinCard machine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contactless card, Apple Pay or Google Pay at the machine. There is no cash slot, no account to create and no app to install."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if a pack does not drop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Email info@edincardvending.com within 48 hours with the machine location, the slot code and the approximate time. We check the vend log and arrange a replacement or a refund."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are EdinCard machines located?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EdinCard's first machine is going into Edinburgh Waverley station (Waverley Station, Edinburgh EH1 1BB) and is not yet taking payments. Further machines are being placed in host venues across Edinburgh — game shops, cafés, collectible stores, arcades and student venues. Each machine is listed on the Locations page from the day it goes live."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I put an EdinCard machine in my venue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. EdinCard supplies, installs, insures, stocks and services the machine, and the host venue takes a share of every vend. There is no stock for the venue to buy or manage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a minimum age to buy from an EdinCard machine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Trading cards are not age-restricted product, and EdinCard machines dispense a named item for a fixed price — they are not gambling machines and there is no random-prize mechanic."
+      }
+    }
+  ]
+}

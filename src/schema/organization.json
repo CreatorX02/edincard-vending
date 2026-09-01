@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://edincardvending.com/#organization",
+  "name": "EdinCard Vending",
+  "legalName": "EdinCard Ltd",
+  "description": "Operator of sealed Pokémon TCG vending machines placed in venues around Edinburgh.",
+  "url": "https://edincardvending.com/",
+  "logo": "https://edincardvending.com/assets/apple-touch-icon.png",
+  "image": "https://edincardvending.com/assets/og-image.png",
+  "email": "info@edincardvending.com",
+  "foundingDate": "2025",
+  "founder": [
+    {
+      "@type": "Person",
+      "name": "Benson"
+    },
+    {
+      "@type": "Person",
+      "name": "Fraser"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Edinburgh",
+    "addressRegion": "Scotland",
+    "addressCountry": "GB"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Edinburgh"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "info@edincardvending.com",
+      "areaServed": "GB",
+      "availableLanguage": "English"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "email": "info@edincardvending.com",
+      "areaServed": "GB",
+      "availableLanguage": "English"
+    }
+  ]
+}

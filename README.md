@@ -1,97 +1,149 @@
 # EdinCard Vending
 
-Landing page for EdinCard Vending, EdinCard Ltd's Pokémon TCG vending machine
-business in Edinburgh. Static site, no build step, no framework — built to a
-current (2026) production standard: semantic HTML, WCAG 2.2-minded
-accessibility, Core Web Vitals-friendly performance, and full SEO/social
-metadata.
+The website for **EdinCard Vending** — EdinCard Ltd's Pokémon TCG vending
+machine business in Edinburgh. A static, multi-page site: no framework, no
+runtime dependencies, nothing to install to deploy it.
 
-## What's in here
+Live at [edincardvending.com](https://edincardvending.com).
+
+## Pages
+
+| Page | File | What it's for |
+| --- | --- | --- |
+| Home | `index.html` | The pitch, plus routes into everything else |
+| How it works | `how-it-works.html` | Buying from a machine, payment, failed vends, access |
+| What's inside | `whats-inside.html` | Slot types, sourcing, pricing and rotation policy |
+| Locations | `locations.html` | Live machines, the rollout plan, email alerts |
+| Host a machine | `host-a-machine.html` | Venue pitch, terms, process, enquiry form, venue FAQ |
+| About | `about.html` | Company story, operating principles, founders, roadmap |
+| FAQ | `faq.html` | Full FAQ in four sections, with `FAQPage` structured data |
+| Contact | `contact.html` | Contact routes and a topic-aware contact form |
+| Privacy | `privacy.html` | UK GDPR privacy and cookies notice |
+| Terms | `terms.html` | Consumer terms for machine purchases |
+| Not found | `404.html` | Branded 404 with routes back into the site |
+
+## How the site is put together
+
+The root `.html` files are **generated** and shouldn't be edited by hand.
+They're stamped out of two things:
 
 ```
-edincard-vending/
-├── index.html         Page content, meta tags, JSON-LD structured data
-├── css/style.css       Design system + styles
-├── js/main.js           Scroll reveals, mobile menu, notify form, stats counter
-├── assets/              favicon.svg, apple-touch-icon.png, og-image.png
-├── robots.txt           Crawler rules + sitemap pointer
-├── sitemap.xml           Single-page sitemap
-├── 404.html              Branded not-found page
-└── CNAME                 GitHub Pages custom domain (edincardvending.com)
+src/
+├── _layout.html        Shared chrome: <head>, header, nav, footer, scripts
+├── pages/*.html        One fragment per page + a JSON front-matter block
+└── schema/*.json       Reusable JSON-LD blocks pages opt into
+tools/build.py          Joins the two and writes the root .html + sitemap.xml
 ```
 
-Sections on the page: sticky header with a live ticker, hero, a stats strip,
-what EdinCard is, three "what's inside" pack tiers, how it works, a locations
-"notify me" signup, a pitch to venue owners who want to host a machine, and
-an FAQ accordion.
+The site itself still has no build step — the generated HTML is committed, so
+deploying is "point a static host at this folder". The generator exists only so
+that the header, footer, nav and meta-tag rules live in **one** place across
+eleven pages, instead of being copy-pasted eleven times and drifting apart.
 
-## What's new since the first version
+### Editing content
 
-- **Mobile menu** — a proper hamburger nav on small screens, not just a
-  hidden desktop nav.
-- **Scroll reveals** — sections fade in via `IntersectionObserver`, and fully
-  disable themselves for anyone with `prefers-reduced-motion` set.
-- **Count-up stats, card tilt, marquee ticker** — small motion details, all
-  respecting reduced-motion.
-- **SEO**: Open Graph + Twitter Card tags, canonical URL, `Store` JSON-LD
-  structured data, `robots.txt`, `sitemap.xml`.
-- **Icons**: SVG favicon, 180×180 apple-touch-icon, 1200×630 OG share image
-  (all generated from the brand tokens, not stock art).
-- **Accessibility**: skip-to-content link, `aria-live` form status, keyboard-
-  operable hero slots, visible focus states throughout, native
-  `<details>`/`<summary>` for the FAQ so it works with zero JS.
-- **Custom 404 page**, styled to match the site.
+1. Edit the fragment in `src/pages/`, or the chrome in `src/_layout.html`.
+2. Run the build:
+   ```bash
+   python3 tools/build.py
+   ```
+3. Commit both the `src/` change and the regenerated root `.html` files.
+
+Each page fragment starts with a front-matter block the build reads:
+
+```html
+<!--META {
+  "title": "Page title — used in <title>, OG and Twitter tags",
+  "description": "Meta description, ~90–175 characters",
+  "schema": ["organization", "faq"],   // optional, from src/schema/
+  "noindex": true,                     // optional, adds robots noindex
+  "nav": "locations",                  // optional, overrides which nav item is active
+  "priority": 0.9,                     // optional, sitemap priority
+  "changefreq": "weekly"               // optional, sitemap changefreq
+}-->
+```
+
+The build fails loudly on missing front matter, invalid JSON, a missing schema
+file, or an unreplaced placeholder — so a broken page won't quietly ship.
+
+### Other files
+
+```
+css/style.css     Design tokens + all styles (one file, no preprocessor)
+js/main.js        Nav, scroll effects, form handling — all progressive
+assets/           favicon.svg, apple-touch-icon.png, og-image.png
+robots.txt        Crawler rules + sitemap pointer
+sitemap.xml       Generated by tools/build.py
+CNAME             GitHub Pages custom domain
+```
+
+## Forms
+
+There are three: the email-alert form (home and locations), the venue enquiry
+form (host a machine) and the contact form.
+
+They share one handler in `js/main.js`, driven by a single constant at the top:
+
+```js
+var FORM_ENDPOINT = "";
+```
+
+- **Empty (current state)** — submissions open the visitor's email client with
+  the message pre-filled and addressed to `info@edincardvending.com`. This works
+  today with no backend, and nothing is silently lost.
+- **Set to an endpoint** — submissions are POSTed as JSON instead. Any service
+  that accepts a JSON POST and allows CORS from this domain will do (Formspree,
+  Basin, Netlify Forms, a Google Apps Script webhook). No other change needed.
+
+Both paths validate required fields inline, announce status via `aria-live`,
+and carry a honeypot field for bots.
 
 ## Running it locally
-
-No install needed. Either:
-
-- Open `index.html` directly in a browser, or
-- Serve it so relative paths behave exactly like production:
 
 ```bash
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Push to GitHub
-
-This folder is already a git repo with an initial commit. To put it on GitHub:
-
-1. Create a new, empty repository on GitHub (no README, no .gitignore, no
-   license, so there's nothing to conflict with) — for example
-   `edincard-vending` under your account or the EdinCard org.
-2. Point this local repo at it and push:
-
-```bash
-cd edincard-vending
-git remote add origin https://github.com/<your-username>/edincard-vending.git
-git branch -M main
-git push -u origin main
-```
+Serve it rather than opening files directly — internal links are root-relative
+(`/about.html`), so they only resolve correctly over HTTP.
 
 ## Deploying
 
-Since it's plain HTML/CSS/JS, GitHub Pages is the fastest route:
+GitHub Pages, from `main`, folder `/ (root)` — Settings → Pages. Any static host
+works identically with no build command. `CNAME` holds the custom domain.
 
-1. In the GitHub repo, go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to `Deploy from a branch`,
-   branch `main`, folder `/ (root)`.
-3. Save. The site publishes to `https://<your-username>.github.io/edincard-vending/`.
+## Before this goes fully public
 
-Any static host (Netlify, Vercel, Cloudflare Pages) works the same way —
-point it at this folder with no build command.
+A few things need a human with facts:
 
-## Next steps
+- **`privacy.html` and `terms.html`** carry a visible "Before publishing" box.
+  Both need EdinCard Ltd's **registered company number and registered office**
+  filled in, and terms should get a solicitor's read-through. Delete the box
+  once done. UK company law requires those details on a trading site.
+- **`locations.html`** lists Edinburgh Waverley as **coming soon**, not live.
+  When the unit is installed and taking payments, three things flip together:
+  the card's pill (`pill-soon` → `pill-live`), the section heading, and the
+  `machine-waverley` entry in the page's `schema` array — see
+  `src/schema/README.md`. Until then no `Store` markup is published for it,
+  because a search result saying you can buy there would be false.
+  The exact position in the station and its daily hours are still to confirm;
+  the card says "hours confirmed at install" in the meantime.
+- **Prices** are deliberately not stated anywhere on the site, since they vary
+  by slot and set. If you want them published, they need to be real.
+- **The hero machine's slot names** (`src/pages/index.html`) list real, current
+  sets — Mega Evolution-era fills plus 151 and Prismatic Evolutions in the
+  Vault slots — and are captioned "Example fill". Swap them for the actual
+  Waverley planogram when you want the mockup to mirror the real machine.
+  No official pack artwork is used anywhere: set names are text only.
+- **`FORM_ENDPOINT`** in `js/main.js` — set it when you want submissions
+  captured rather than routed through the visitor's email client.
+- **Analytics** are deliberately absent, which is why there's no cookie banner
+  and the privacy notice can say the site sets no cookies. Adding analytics
+  means adding a consent mechanism and updating that notice.
 
-- Swap the `notify-form` submit handler in `js/main.js` for a real signup
-  endpoint (Formspree, a Google Sheet via Apps Script, Mailchimp, etc.).
-- Add real machine locations to the Locations section once the first units
-  are placed.
-- Drop a logo/wordmark into `assets/` and swap it in for the `EC` text mark
-  (update `favicon.svg`, `apple-touch-icon.png`, and `og-image.png` to match).
-- The FAQ's payment/return/stocking answers are placeholder copy — confirm
-  actual policy (returns, data handling, T&Cs) before relying on it publicly.
-- Consider adding Google Search Console + a lightweight analytics tool
-  (e.g. Plausible or GA4) once the domain is fully live, so signups and
-  traffic are measurable.
+## Roadmap for the site
+
+- Per-machine stock listings, once machines are live
+- A real locations map, once there's more than a handful of pins
+- A press/news page if there's ever anything to put on it

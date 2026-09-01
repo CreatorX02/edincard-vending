@@ -1,0 +1,159 @@
+<!--META {
+  "title": "Locations — Find a Pokémon Card Machine in Edinburgh",
+  "description": "EdinCard's first Pokémon TCG vending machine is going into Edinburgh Waverley station. See the rollout across the city and get an email the day a machine goes live.",
+  "schema": ["organization", "store"],
+  "priority": 0.9,
+  "changefreq": "weekly"
+}-->
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Locations</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">C1 &middot; WHERE TO FIND ONE</p>
+      <h1>First stop: Edinburgh Waverley.</h1>
+      <p class="page-hero-lead">Our first machine is going into Waverley, with more venues across the city to follow through late 2026. Nothing is taking payments yet — every machine gets listed here with its venue, address and opening hours the day it actually goes live.</p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="#notify">Tell me when it lands</a>
+        <a class="btn btn-outline" href="/host-a-machine.html">Suggest a venue</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE MACHINES -->
+  <section class="section" id="live">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">FIRST SITE</p>
+        <h2>Where the first machine is going.</h2>
+        <p class="lead">No machine is taking payments yet. When one is, this section becomes the list of units you can actually walk up to &mdash; we won't mark a machine live before it exists.</p>
+      </div>
+
+      <!--
+        ADDING A MACHINE
+        ----------------
+        Add one <article class="location-card"> per live unit, following the
+        Waverley card below. Use pill-live for an installed, paying unit,
+        pill-soon for a confirmed install with a date, and pill-scouting for
+        a venue still in conversation.
+
+        A new site also wants its own JSON-LD: copy src/schema/machine-waverley.json,
+        change the @id, name and address, and add the filename to this page's
+        "schema" list in the front matter above. That is what puts the machine
+        into local search results.
+
+        Remember to re-run: python3 tools/build.py
+      -->
+      <div class="card-grid card-grid-2" data-reveal>
+        <article class="location-card">
+          <div class="location-card-top">
+            <h3>Edinburgh Waverley</h3>
+            <span class="pill pill-soon">Coming soon</span>
+          </div>
+          <p>Our first site: the city-centre station between the Old Town and Princes Street, and about as much footfall as Scotland has to offer. We'll confirm the exact spot inside the station when it goes in.</p>
+          <div class="location-meta">
+            <span>Waverley Station, Edinburgh EH1 1BB</span>
+            <span>Entrances: Waverley Bridge, Princes Street, Market Street</span>
+            <span>Contactless only &middot; Hours confirmed at install</span>
+          </div>
+        </article>
+        <article class="location-card">
+          <div class="location-card-top">
+            <h3>Your venue next?</h3>
+            <span class="pill pill-scouting">Scouting</span>
+          </div>
+          <p>We're picking the next sites now. If you run somewhere in Edinburgh with footfall and a spare square metre, the machine costs you nothing to host.</p>
+          <div class="location-meta">
+            <span>Game shops &middot; caf&eacute;s &middot; collectible stores</span>
+            <span>Arcades &middot; student venues &middot; indoor markets</span>
+          </div>
+          <p style="margin-bottom:0"><a class="teaser-more" href="/host-a-machine.html">Host a machine</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLLOUT -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">THE ROLLOUT</p>
+        <h2>How the city gets covered.</h2>
+        <p class="lead">We're not carpet-bombing Edinburgh with units. Each machine goes somewhere it'll actually be used, gets serviced properly, and proves itself before the next one goes in.</p>
+      </div>
+
+      <div class="split" data-reveal>
+        <ol class="process">
+          <li>
+            <span class="process-step" aria-hidden="true">01</span>
+            <h3>Scout</h3>
+            <p>We look for venues where people already stop and linger — game shops, comic and collectible stores, caf&eacute;s, arcades, student venues — with the floor space and the footfall to justify a unit.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">02</span>
+            <h3>Agree and install</h3>
+            <p>Terms and revenue share agreed in writing first, then we deliver, site, power up and stock the machine. The venue does nothing but point at a wall.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">03</span>
+            <h3>Service and tune</h3>
+            <p>Fixed-schedule restocks, plus a stock mix tuned to what that venue's regulars actually buy. Slots that don't move get reassigned.</p>
+          </li>
+          <li>
+            <span class="process-step" aria-hidden="true">04</span>
+            <h3>List it here</h3>
+            <p>Once it's live and taking payments, the venue goes on this page and everyone on the notify list gets an email.</p>
+          </li>
+        </ol>
+
+        <div data-reveal data-reveal-delay="1">
+          <div class="card">
+            <div class="card-icon" aria-hidden="true">◎</div>
+            <h3>Areas we're prioritising</h3>
+            <p>Old Town and the Royal Mile, Newington and the university belt, Leith Walk, Tollcross and Bruntsfield, and the West End. Those are where the collector footfall and the venue density overlap.</p>
+          </div>
+          <div class="card" style="margin-top:22px">
+            <div class="card-icon" aria-hidden="true">★</div>
+            <h3>Know a spot?</h3>
+            <p>If there's a shop, caf&eacute; or venue that's obviously crying out for a machine, tell us — including if it's your own. Venue suggestions from locals are how the good sites get found.</p>
+            <p style="margin-top:14px"><a class="teaser-more" href="/host-a-machine.html">Suggest a venue</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTIFY -->
+  <section class="section locations" id="notify">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>ALERTS</p>
+      <h2 data-reveal>Get an email the day a machine goes live.</h2>
+      <p class="locations-sub" data-reveal>One email per new machine, plus the occasional note when something unusual lands in a Vault slot. No newsletter, no daily nonsense, unsubscribe in one click.</p>
+
+      <form class="notify-form" id="notify-form" data-reveal novalidate>
+        <label class="sr-only" for="notify-email">Email address</label>
+        <input type="email" id="notify-email" name="email" placeholder="you@email.com" required autocomplete="email" inputmode="email">
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Notify me</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+      <p class="form-note" id="notify-note" role="status" aria-live="polite"></p>
+      <p class="form-consent center" style="max-width:52ch;margin-left:auto;margin-right:auto">We use your email only to tell you about EdinCard machines. See the <a href="/privacy.html">privacy notice</a>.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap" data-reveal>
+      <h2>Or skip the wait entirely.</h2>
+      <p>If you run a venue in Edinburgh, the fastest way to get a machine near you is to put one in your own.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="/host-a-machine.html">Host a machine</a>
+        <a class="btn btn-outline" href="/contact.html">Contact us</a>
+      </div>
+    </div>
+  </section>

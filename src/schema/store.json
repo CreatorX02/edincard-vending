@@ -1,0 +1,19 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "EdinCard Vending",
+  "description": "Sealed Pokémon TCG vending machines placed in venues around Edinburgh.",
+  "url": "https://edincardvending.com/",
+  "image": "https://edincardvending.com/assets/og-image.png",
+  "email": "info@edincardvending.com",
+  "priceRange": "££",
+  "paymentAccepted": "Contactless card, Apple Pay, Google Pay",
+  "currenciesAccepted": "GBP",
+  "parentOrganization": { "@id": "https://edincardvending.com/#organization" },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Edinburgh",
+    "addressRegion": "Scotland",
+    "addressCountry": "GB"
+  }
+}
